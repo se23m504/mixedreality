@@ -268,6 +268,21 @@ namespace Microsoft.MixedReality.OpenXR
                         .WithProduct(kDeviceLocalizedName));
         }
 
+        /// <summary>
+        /// Return device layout string that used for registering device for Input System.
+        /// </summary>
+        /// <returns>Device layout string.</returns>
+        protected override string GetDeviceLayoutName()
+        {
+            return nameof(HPMixedRealityController);
+        }
+
+        /// <inheritdoc/>
+        protected override InteractionProfileType GetInteractionProfileType()
+        {
+            return base.GetInteractionProfileType();
+        }
+
         /// <inheritdoc/>
         protected override void UnregisterDeviceLayout()
         {
