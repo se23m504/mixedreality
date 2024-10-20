@@ -423,6 +423,7 @@ namespace Microsoft.MixedReality.WebRTC.Unity
 
             // Create the offer
             AutoCreateOfferOnRenegotiationNeeded = true;
+            _nativePeer.PreferredVideoCodec = "H264"; // 'VP8' is the default
             return _nativePeer.CreateOffer();
         }
 
@@ -674,6 +675,7 @@ namespace Microsoft.MixedReality.WebRTC.Unity
         {
             // Create the peer connection managed wrapper and its native implementation
             _nativePeer = new WebRTC.PeerConnection();
+            _nativePeer.PreferredVideoCodec = "H264"; // 'VP8' is the default
 
             _nativePeer.AudioTrackAdded +=
                 (RemoteAudioTrack track) =>
@@ -739,6 +741,7 @@ namespace Microsoft.MixedReality.WebRTC.Unity
                     TurnPassword = IceCredential
                 });
             }
+            _nativePeer.PreferredVideoCodec = "H264"; // 'VP8' is the default
             return _nativePeer.InitializeAsync(config, token).ContinueWith((initTask) =>
             {
                 token.ThrowIfCancellationRequested();
@@ -779,6 +782,10 @@ namespace Microsoft.MixedReality.WebRTC.Unity
 
             // Once the peer is initialized, it becomes publicly accessible.
             // This prevent scripts from accessing it before it is initialized.
+
+            Debug.Log("H264 is set as the preferred video codec.");
+
+            _nativePeer.PreferredVideoCodec = "H264"; // 'VP8' is the default
             Peer = _nativePeer;
 
             OnInitialized.Invoke();
